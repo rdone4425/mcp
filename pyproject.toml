@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ai-context-memory"
+name = "memory"
 version = "1.0.0"
-description = "AI Context Memory MCP Server - AI上下文记忆管理服务"
+description = "Memory MCP Server - AI记忆管理服务"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.8"
@@ -13,12 +13,10 @@ authors = [
     { name = "AI Context Memory Team" },
 ]
 keywords = [
-    "ai",
-    "context", 
     "memory",
     "mcp",
-    "assistant",
-    "llm"
+    "ai",
+    "assistant"
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -50,8 +48,8 @@ dev = [
 ]
 
 [project.scripts]
-ai-context-memory = "ai_context_memory.cli:main"
-ai-memory = "ai_context_memory.cli:main"
+memory = "ai_context_memory.cli:main"
+mem = "ai_context_memory.cli:main"
 mcp_server = "mcp_server:main"
 ai-context-memory-mcp = "mcp_server:main"
 
