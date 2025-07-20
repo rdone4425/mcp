@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 class MemoryManager:
     """Core memory management class."""
     
-    def __init__(self, db_path: str = "memories.db"):
+    def __init__(self, db_path: str = None):
         self.db_manager = DatabaseManager(db_path)
         
     async def initialize(self):

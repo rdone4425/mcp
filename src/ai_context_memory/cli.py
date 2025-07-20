@@ -54,6 +54,13 @@ def get_project_root():
     # 使用当前工作目录
     return Path.cwd()
 
+def get_default_db_path(db_name: str = "memories.db") -> str:
+    """获取默认数据库路径"""
+    # 使用用户主目录下的.ai-context-memory文件夹
+    data_dir = Path.home() / ".ai-context-memory"
+    data_dir.mkdir(exist_ok=True)
+    return str(data_dir / db_name)
+
 def setup_python_path():
     """设置Python路径"""
     project_root = get_project_root()
@@ -93,7 +100,8 @@ async def start_mcp_server(args):
     if args.log_file:
         cmd.extend(["--log-file", args.log_file])
     
-    print(f"📍 数据库: {args.db_path or 'memories.db'}")
+    db_path = args.db_path or get_default_db_path("memories.db")
+    print(f"📍 数据库: {db_path}")
     print(f"📊 日志级别: {args.log_level or 'INFO'}")
     print("\n按 Ctrl+C 停止服务器\n")
     
@@ -125,7 +133,7 @@ async def start_http_server(args):
             server = http_server.MemoryHTTPServer(
                 host=args.host,
                 port=args.port,
-                db_path=args.db_path or "api_memories.db"
+                db_path=args.db_path or get_default_db_path("api_memories.db")
             )
             
             await server.start_server()
@@ -166,7 +174,7 @@ def create_mcp_config(args):
         "mcpServers": {
             "ai-context-memory": {
                 "command": "uvx",
-                "args": ["ai-context-memory", "mcp"],
+                "args": ["--from", "git+https://github.com/rdone4425/mcp.git", "ai-context-memory", "mcp"],
                 "env": {
                     "LOG_LEVEL": args.log_level or "INFO"
                 }

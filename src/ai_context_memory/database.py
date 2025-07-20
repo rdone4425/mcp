@@ -13,7 +13,13 @@ logger = logging.getLogger(__name__)
 class DatabaseManager:
     """SQLite database manager for memory storage."""
     
-    def __init__(self, db_path: str = "memories.db"):
+    def __init__(self, db_path: str = None):
+        if db_path is None:
+            # 使用用户主目录下的.ai-context-memory文件夹
+            from pathlib import Path
+            data_dir = Path.home() / ".ai-context-memory"
+            data_dir.mkdir(exist_ok=True)
+            db_path = str(data_dir / "memories.db")
         self.db_path = db_path
         self._initialized = False
         self._connection = None  # For in-memory databases

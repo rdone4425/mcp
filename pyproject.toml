@@ -55,10 +55,10 @@ ai-memory = "ai_context_memory.cli:main"
 ai-context-memory-mcp = "mcp_server:main"
 
 [project.urls]
-Homepage = "https://github.com/your-org/ai-context-memory"
-Repository = "https://github.com/your-org/ai-context-memory.git"
-Issues = "https://github.com/your-org/ai-context-memory/issues"
-Documentation = "https://github.com/your-org/ai-context-memory/wiki"
+Homepage = "https://github.com/rdone4425/mcp"
+Repository = "https://github.com/rdone4425/mcp.git"
+Issues = "https://github.com/rdone4425/mcp/issues"
+Documentation = "https://github.com/rdone4425/mcp/wiki"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ai_context_memory"]

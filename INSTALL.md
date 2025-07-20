@@ -6,10 +6,16 @@
 
 ```bash
 # 直接从GitHub运行MCP服务器
-uvx --from git+https://github.com/your-org/ai-context-memory ai-context-memory-mcp
+uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory mcp
 
-# 或者运行完整CLI
-uvx --from git+https://github.com/your-org/ai-context-memory ai-context-memory mcp
+# 启动HTTP API服务器
+uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory http
+
+# 启动交互式界面
+uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory interactive
+
+# 创建MCP配置文件
+uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory config
 ```
 
 ### 使用 uvx 从PyPI运行
@@ -28,11 +34,21 @@ uvx ai-context-memory interactive
 uvx ai-context-memory config
 ```
 
-### 使用 uv 安装
+### 使用 uv 从GitHub安装
 
 ```bash
-# 安装到全局环境
-uv tool install ai-context-memory
+# 从GitHub安装到全局环境
+uv tool install git+https://github.com/rdone4425/mcp.git
+
+# 运行
+ai-context-memory mcp
+```
+
+### 使用 pip 从GitHub安装
+
+```bash
+# 从GitHub安装
+pip install git+https://github.com/rdone4425/mcp.git
 
 # 运行
 ai-context-memory mcp
@@ -119,7 +135,7 @@ uvx ai-context-memory config
   "mcpServers": {
     "ai-context-memory": {
       "command": "uvx",
-      "args": ["ai-context-memory", "mcp"],
+      "args": ["--from", "git+https://github.com/rdone4425/mcp.git", "ai-context-memory", "mcp"],
       "env": {
         "LOG_LEVEL": "INFO"
       }
@@ -152,8 +168,8 @@ curl "http://localhost:8000/stats"
 ### 从源码运行
 ```bash
 # 克隆仓库
-git clone https://github.com/your-org/ai-context-memory.git
-cd ai-context-memory
+git clone https://github.com/rdone4425/mcp.git
+cd mcp
 
 # 使用uv安装依赖
 uv sync
@@ -177,19 +193,41 @@ uv publish
 ## 📚 更多信息
 
 - 📖 [完整文档](README.md)
-- 🐛 [问题反馈](https://github.com/your-org/ai-context-memory/issues)
-- 💬 [讨论区](https://github.com/your-org/ai-context-memory/discussions)
+- 🐛 [问题反馈](https://github.com/rdone4425/mcp/issues)
+- 💬 [讨论区](https://github.com/rdone4425/mcp/discussions)
+
+## 📁 数据存储
+
+### 默认数据库位置
+- **默认路径**: `~/.ai-context-memory/memories.db`
+- **HTTP API**: `~/.ai-context-memory/api_memories.db`
+- **交互式**: `~/.ai-context-memory/local_memories.db`
+
+### 自定义数据库路径
+```bash
+# 使用自定义路径
+uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory mcp --db-path /path/to/your/database.db
+
+# 使用相对路径
+uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory mcp --db-path ./project_memories.db
+```
 
 ## 🎯 常见问题
+
+### Q: 数据存储在哪里？
+A: 默认存储在用户主目录的 `~/.ai-context-memory/` 文件夹中
 
 ### Q: 如何更改数据库位置？
 A: 使用 `--db-path` 参数指定自定义路径
 
+### Q: 如何备份数据？
+A: 直接复制 `~/.ai-context-memory/` 文件夹或指定的数据库文件
+
+### Q: 多个项目如何使用不同的数据库？
+A: 为每个项目指定不同的 `--db-path` 参数
+
 ### Q: 如何启用HTTPS？
 A: HTTP服务器目前只支持HTTP，建议在反向代理后面使用HTTPS
-
-### Q: 如何备份数据？
-A: 直接复制SQLite数据库文件即可
 
 ### Q: 支持哪些Python版本？
 A: 支持Python 3.8及以上版本
