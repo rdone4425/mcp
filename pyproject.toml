@@ -52,6 +52,7 @@ dev = [
 [project.scripts]
 ai-context-memory = "ai_context_memory.cli:main"
 ai-memory = "ai_context_memory.cli:main"
+mcp_server = "mcp_server:main"
 ai-context-memory-mcp = "mcp_server:main"
 
 [project.urls]

@@ -8,7 +8,7 @@
 # 直接从GitHub运行MCP服务器
 uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory mcp
 
-# 启动HTTP API服务器
+# 启动HTTP API服务器  
 uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory http
 
 # 启动交互式界面
@@ -16,6 +16,13 @@ uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory interactiv
 
 # 创建MCP配置文件
 uvx --from git+https://github.com/rdone4425/mcp.git ai-context-memory config
+```
+
+### 简化命令（推荐用于MCP配置）
+
+```bash
+# 如果你只需要MCP服务器，也可以直接运行独立脚本
+uvx --from git+https://github.com/rdone4425/mcp.git mcp_server.py
 ```
 
 ### 使用 uvx 从PyPI运行
